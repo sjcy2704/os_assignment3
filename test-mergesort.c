@@ -4,7 +4,6 @@
 #include <sys/times.h> /* for times system call */
 #include <sys/time.h>  /* for gettimeofday system call */
 #include <unistd.h>
-#include <error.h>     /* On MacOS you won't need this line */
 #include "mergesort.h"
 
 /* the number of levels of threads, specified by the user */
@@ -106,22 +105,20 @@ int check_if_sorted(int A[], int n)
 }
 
 /* this function prints A, but we only print the first 100 elements */
-void printA(void){
+void printA(int arrSize){
 	int i;
 	printf("Array A:");
-	/* FIXME: we assume the size of A is at least 100, and this will fail if it is lower than 100 */
-	for(i=0;i<100;i++){
+	for(i=0;i<arrSize;i++){
 		printf(" %d",A[i]);
 	}
 	printf("\n");
 }
 
 /* this function prints B, but we only print the first 100 elements */
-void printB(void){
+void printB(int arrSize){
 	int i;
 	printf("Array B:");
-	/* FIXME: we assume the size of B is at least 100, and this will fail if it is lower than 100 */
-	for(i=0;i<100;i++){
+	for(i=0;i<arrSize;i++){
 		printf(" %d",B[i]);
 	}
 	printf("\n");
@@ -159,8 +156,8 @@ int main(int argc, char **argv) {
 	sorting_time = getMilliSeconds() - start_time;
 
 	// print the array, for debugging purpose.
-	//printA();
-	//printB();
+	/* printA(n); */
+	/* printB(n); */
 	// print results if correctly sorted otherwise cry foul and exit
 	if (check_if_sorted(A,n)) {
 		printf("Sorting %d elements took %4.2lf seconds.\n", n,  sorting_time/1000.0);
